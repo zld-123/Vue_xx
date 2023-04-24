@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>姓名案例-watch实现</title>
+<!--  引入Vue-->
+  <script type="text/javascript" src="../../js/vue.js"></script>
+</head>
+<body>
+<!--
+        computed 和 watch之间的区别
+            1，computed能完成的功能，watch也能完成
+            2，watch能完成的功能，computed不一定嫩南瓜完成，例如： watch 可以进行异步操作
+        两个重要的小原则
+            1，所被Vue管理的函数，最好写成普通函数，这样this的指向才是vm 或 组件实例对象
+            2，所有不被Vue所管理的函数，（定时器的回调函、ajax的回调函数、Promise的回调函数等）最好写成箭头函数，
+                这样this的指向才是vm 或 组件实例对象
+-->
+<!--准备一个容器-->
+<div id="root">
+    姓：<input type="text" v-model="firstName"><br><br>
+    名：<input type="text" v-model="lastName"><br><br>
+    姓名：<span>{{fullName}}</span>
+</div>
+</body>
+<script type="text/javascript">
+    Vue.config.productionTip = false //将productionTip 设置为 false 以阻止 Vue启动时生产生产提示
+    const vm = new Vue({
+        el:'#root',
+        data:{
+            firstName:'张',
+            lastName:'磊',
+            fullName:'张-磊'
+        },
+        watch:{
+            firstName(val){
+                setTimeout(()=>{
+                    this.fullName = val + '-' + this.lastName
+                },1000);
+            },
+            lastName(val){
+                this.fullName = this.firstName + '-' + val
+            }
+        }
+    })
+</script>
+</html>

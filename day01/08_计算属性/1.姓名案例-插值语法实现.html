@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>姓名案例-插值语法实现</title>
+<!--  引入Vue-->
+  <script type="text/javascript" src="../../js/vue.js"></script>
+</head>
+<body>
+<!--准备一个容器-->
+<div id="root">
+    姓：<input type="text" v-model="firstName"><br><br>
+    名：<input type="text" v-model="lastName"><br><br>
+    姓名：<span>{{firstName}}-{{lastName}}</span>
+</div>
+</body>
+<script type="text/javascript">
+    Vue.config.productionTip = false //将productionTip 设置为 false 以阻止 Vue启动时生产生产提示
+    new Vue({
+        el:'#root',
+        data:{
+            firstName:'张',
+            lastName:'磊'
+        }
+    })
+</script>
+</html>

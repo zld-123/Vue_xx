@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>键盘事件</title>
+    <!--    引入Vue-->
+    <script type="text/javascript" src="../../js/vue.js"></script>
+</head>
+<body>
+<!--    1,Vue中常用的按键别名:
+             回车 =》 enter
+             删除 =》 delete（捕获“删除” 和 “退格”键）
+             退出 =》 esc
+             空格 =》 space
+             换行 =》 tab （特殊：必须配合 keydown 使用）
+             上   =》 up
+             下   =》 down
+             左   =》 left
+             右   =》 right
+
+        2,Vue未提供别名的按键，可以使用按键原始的key值去绑定，但注意要转为kebab-case（段横线命名）
+        3，系统修饰建（用法特殊）：ctrl、alt shift meta
+            (1),配合keyup使用：按下修饰建的同时，在按下其他建，随后释放其他键，事件才会被触发
+            (2),派和keydown使用：正常触发事件
+        4,也可以使用keyCode去指定的按键（不推荐）
+        5,Vue,config.keyCodes.自定义键名 = 键码，可以去定制按键别名
+-->
+<!--准备一个容器-->
+<div id="root">
+    <h2>欢迎来到{{name}}</h2>
+    <input type="text" placeholder="按下回车提示输入" @keydown.tab="showInfo">
+</div>
+</body>
+<script type="text/javascript">
+    Vue.config.productionTip = false //将productionTip 设置为 false 以阻止 Vue启动时生产生产提示
+
+    new Vue({
+        el:'#root',
+        data:{
+            name:'五河'
+        },
+        methods:{
+            showInfo(e){
+                console.log(e.target.value);
+            }
+        }
+    })
+</script>
+
+</html>

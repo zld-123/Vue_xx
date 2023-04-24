@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>天气案例_监视属性</title>
+    <!--  引入Vue-->
+    <script type="text/javascript" src="../../js/vue.js"></script>
+</head>
+<body>
+<!--
+       监视属性watch
+            1,当被监视的属性变化时，回调函数自动调用，进行相关操作
+            2,监视的属性必须存在，才能进行监视(如果没有被监视的属性也不会报错，但是不会有值)
+            3,监视的两种写法
+                (1),new Vue时传入watch配置
+                (2),通过vm.$wacth监视
+-->
+<!--准备一个容器-->
+<div id="root">
+    <h2>今天天气很{{info}}</h2>
+    <button @click="changeWeather">切换天气</button>
+</div>
+
+</body>
+<script type="text/javascript">
+    Vue.config.productionTip = false //将productionTip 设置为 false 以阻止 Vue启动时生产生产提示
+    const vm = new Vue({
+        el:'#root',
+        data:{
+            isHot:true
+        },
+        computed:{
+            info(){
+                return this.isHot ? '炎热' : '凉爽'
+            }
+        },
+        methods:{
+            changeWeather(){
+                this.isHot = !this.isHot
+            }
+        },
+        // 当我们一开始就明确需要监视谁的时候可以直接书写 watch
+        // watch:{
+        //     info:{
+        //         immediate:true,//初始化时让 handler 调用一下
+        //         //handler什么时候调用？当isHot发生改变时
+        //         handler(newValue,oldValue){
+        //             console.log('info被修改了','现在天气变得：'+newValue,'之前天气是：'+oldValue)
+        //         }
+        //     }
+        // }
+    })
+    //当我们一开始不知道的时候可以在后面写监视，效果一样，但是需要写$符
+    vm.$watch('isHot',{
+        immediate:true,//初始化时让 handler 调用一下
+        //handler什么时候调用？当isHot发生改变时
+        handler(newValue,oldValue){
+        console.log('info被修改了','现在天气变得：'+newValue,'之前天气是：'+oldValue)
+    })
+
+</script>
+</html>
